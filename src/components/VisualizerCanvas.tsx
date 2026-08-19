@@ -1,3 +1,13 @@
+// ==============================================================================
+// VisualizerCanvas.tsx
+// Real-time oscilloscope waveform & FFT frequency spectrum rendering canvas.
+//
+// Features:
+// - Matches C++ Visualizer.cpp: 60 FPS update loop.
+// - Top half: Time-domain oscilloscope waveform with glow effect.
+// - Bottom half: Frequency-domain 128-band FFT spectrum bars with gradient fill.
+// ==============================================================================
+
 import React, { useRef, useEffect } from 'react';
 import { VisualizerEngine } from '../audio/VisualizerEngine';
 import { Activity, BarChart2 } from 'lucide-react';
@@ -140,3 +150,4 @@ export const VisualizerCanvas: React.FC<VisualizerCanvasProps> = ({
     </div>
   );
 };
+

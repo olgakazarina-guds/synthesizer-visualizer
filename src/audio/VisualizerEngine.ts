@@ -1,4 +1,12 @@
-// Visualizer Engine mirroring C++ Visualizer.h and Visualizer.cpp
+// ==============================================================================
+// VisualizerEngine.ts
+// Real-time Canvas Visualizer rendering Oscilloscope & DFT Spectrum.
+//
+// Role in project architecture (Mohammed / Right UML):
+// - Renders green time-domain oscilloscope waveform.
+// - Performs Discrete Fourier Transform (DFT) to render frequency magnitude bars.
+// ==============================================================================
+
 export class VisualizerEngine {
   private waveform: Float32Array;
   private spectrum: Float32Array;
@@ -10,12 +18,14 @@ export class VisualizerEngine {
     this.spectrum = new Float32Array(fftSize / 2);
   }
 
+  // Configure FFT size
   public setup(size: number = 256): void {
     this.fftSize = size;
     this.waveform = new Float32Array(size);
     this.spectrum = new Float32Array(size / 2);
   }
 
+  // Update buffer with latest audio samples
   public update(samples: Float32Array): void {
     if (!samples || samples.length === 0) return;
     
@@ -28,6 +38,7 @@ export class VisualizerEngine {
     this.computeSpectrum();
   }
 
+  // Compute Discrete Fourier Transform (DFT) to convert Time Domain -> Frequency Domain
   private computeSpectrum(): void {
     if (this.waveform.length < this.fftSize) return;
 
@@ -54,6 +65,7 @@ export class VisualizerEngine {
     return this.spectrum;
   }
 
+  // Draw oscilloscope waveform on HTML5 canvas
   public drawWaveform(
     ctx: CanvasRenderingContext2D,
     x: number,
@@ -71,7 +83,7 @@ export class VisualizerEngine {
     ctx.lineTo(x + w, y + h / 2);
     ctx.stroke();
 
-    // Waveform line in neon emerald/mint: rgb(80, 220, 160) matching C++ ofApp
+    // Waveform line in emerald/mint: rgb(80, 220, 160) matching C++ ofApp
     ctx.strokeStyle = 'rgb(80, 220, 160)';
     ctx.lineWidth = 2;
     ctx.beginPath();
@@ -96,6 +108,7 @@ export class VisualizerEngine {
     ctx.restore();
   }
 
+  // Draw frequency spectrum bars on HTML5 canvas
   public drawSpectrum(
     ctx: CanvasRenderingContext2D,
     x: number,
@@ -126,3 +139,4 @@ export class VisualizerEngine {
     ctx.restore();
   }
 }
+

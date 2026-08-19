@@ -1,3 +1,14 @@
+// ==============================================================================
+// App.tsx
+// Root application component for the Software Synthesizer & Visualizer.
+//
+// Responsibilities:
+// - Manages global audio engine lifecycle (SynthEngine and VisualizerEngine).
+// - Handles computer keyboard events (A-K for notes, 1-3 for waveforms).
+// - Manages user parameter state (wave type, ADSR envelope, master volume).
+// - Organizes layout: Header, Visualizer Canvas, Pitch Ribbon, Piano, and Synth Controls.
+// ==============================================================================
+
 import React, { useState, useEffect, useCallback } from 'react';
 import { WaveType, ADSRParams, VoiceState } from './types';
 import { SynthEngine } from './audio/SynthEngine';
@@ -10,9 +21,11 @@ import { PitchRibbon } from './components/PitchRibbon';
 import { ArchitectureModal } from './components/ArchitectureModal';
 
 export const App: React.FC = () => {
+  // Instantiates audio engine and FFT visualizer
   const [synth] = useState<SynthEngine>(() => new SynthEngine(44100, 512, 8));
   const [visualizer] = useState<VisualizerEngine>(() => new VisualizerEngine(256));
 
+  // Application state
   const [isAudioStarted, setIsAudioStarted] = useState<boolean>(false);
   const [currentWaveType, setCurrentWaveType] = useState<WaveType>(WaveType.SINE);
   const [masterVolume, setMasterVolume] = useState<number>(0.8);
@@ -45,6 +58,7 @@ export const App: React.FC = () => {
     k: 72, // C5
   };
 
+  // Start audio on user gesture
   const handleStartAudio = async () => {
     const success = await synth.initAudio();
     if (success) {
@@ -52,6 +66,7 @@ export const App: React.FC = () => {
     }
   };
 
+  // Trigger musical note
   const handleNoteOn = useCallback(
     (midiNote: number, frequency?: number) => {
       if (!synth.isStarted()) {
@@ -63,6 +78,7 @@ export const App: React.FC = () => {
     [synth]
   );
 
+  // Release musical note
   const handleNoteOff = useCallback(
     (midiNote: number) => {
       synth.noteOff(midiNote);
@@ -75,16 +91,19 @@ export const App: React.FC = () => {
     [synth]
   );
 
+  // Change waveform type (Sine, Square, Sawtooth)
   const handleWaveTypeChange = (type: WaveType) => {
     synth.setWaveType(type);
     setCurrentWaveType(type);
   };
 
+  // Update ADSR parameters
   const handleAdsrChange = (newAdsr: ADSRParams) => {
     synth.setADSR(newAdsr.attack, newAdsr.decay, newAdsr.sustain, newAdsr.release);
     setAdsr(newAdsr);
   };
 
+  // Update master volume
   const handleVolumeChange = (vol: number) => {
     synth.setMasterVolume(vol);
     setMasterVolume(vol);
@@ -98,7 +117,7 @@ export const App: React.FC = () => {
       if (e.repeat) return;
       const key = e.key.toLowerCase();
 
-      // Waveform shortcuts
+      // Waveform shortcuts (1, 2, 3)
       if (key === '1') {
         handleWaveTypeChange(WaveType.SINE);
         return;
@@ -112,7 +131,7 @@ export const App: React.FC = () => {
         return;
       }
 
-      // Musical note keys
+      // Musical note keys (A through K)
       if (keyToNoteMap[key] !== undefined && !pressedKeys.has(key)) {
         pressedKeys.add(key);
         const midi = keyToNoteMap[key];
@@ -138,7 +157,7 @@ export const App: React.FC = () => {
     };
   }, [handleNoteOn, handleNoteOff]);
 
-  // Voice state polling for UI
+  // Periodic polling of voice state for the UI indicator matrix
   useEffect(() => {
     const interval = setInterval(() => {
       setVoiceStates(synth.getVoiceStates());
@@ -204,3 +223,4 @@ export const App: React.FC = () => {
     </div>
   );
 };
+

@@ -1,3 +1,13 @@
+// ==============================================================================
+// SynthControls.tsx
+// Interactive control panel for waveform selection, ADSR sliders, and voice status.
+//
+// Sections:
+// 1. Oscillator Waveform Selector: Sine (1), Square (2), Sawtooth (3).
+// 2. ADSR Envelope Controls: Attack, Decay, Sustain, Release with live SVG curve.
+// 3. 8-Voice Polyphony Matrix: Real-time status indicators for all 8 voices.
+// ==============================================================================
+
 import React from 'react';
 import { WaveType, ADSRParams, VoiceState } from '../types';
 import { Sliders, Volume2, Waves, Zap } from 'lucide-react';
@@ -212,12 +222,12 @@ export const SynthControls: React.FC<SynthControlsProps> = ({
             <svg className="w-full h-full" viewBox="0 0 100 30" preserveAspectRatio="none">
               <path
                 d={`M 0,30 L ${Math.min(25, adsr.attack * 20)},0 L ${Math.min(
-                  50,
-                  25 + adsr.decay * 20
-                )},${30 - adsr.sustain * 25} L 75,${30 - adsr.sustain * 25} L ${Math.min(
-                  100,
-                  75 + adsr.release * 10
-                )},30`}
+                    25 + adsr.decay * 20,
+                    50
+                  )},${30 - adsr.sustain * 25} L 75,${30 - adsr.sustain * 25} L ${Math.min(
+                    100,
+                    75 + adsr.release * 10
+                  )},30`}
                 fill="none"
                 stroke="#34d399"
                 strokeWidth="2"
@@ -286,3 +296,4 @@ export const SynthControls: React.FC<SynthControlsProps> = ({
     </div>
   );
 };
+

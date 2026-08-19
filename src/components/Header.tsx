@@ -1,3 +1,13 @@
+// ==============================================================================
+// Header.tsx
+// Navigation and top toolbar component.
+//
+// Features:
+// - Project title and version badge.
+// - Audio engine toggle button (Web Audio Context starter).
+// - Architecture modal viewer button.
+// ==============================================================================
+
 import React from 'react';
 import { Volume2, Power, Code2 } from 'lucide-react';
 
@@ -34,6 +44,7 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="flex items-center gap-3">
+        {/* Button to open the UML and team architecture dialog */}
         <button
           id="view-architecture-btn"
           type="button"
@@ -44,6 +55,7 @@ export const Header: React.FC<HeaderProps> = ({
           <span>Architecture & UML</span>
         </button>
 
+        {/* Button to start or stop the audio engine */}
         <button
           id="audio-power-btn"
           type="button"
@@ -61,3 +73,4 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
   );
 };
+

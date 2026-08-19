@@ -1,3 +1,12 @@
+// ==============================================================================
+// Envelope.ts
+// ADSR Volume Envelope Generator (Attack, Decay, Sustain, Release).
+//
+// Role in project architecture (Olga / Left UML):
+// - Controls the note volume over time with 4 stages to avoid audio pops.
+// - process() returns a multiplier between 0.0 (silent) and 1.0 (full volume).
+// ==============================================================================
+
 import { EnvelopeStage } from '../types';
 
 export class Envelope {
@@ -19,10 +28,12 @@ export class Envelope {
     this.releaseTime = 0.3;
   }
 
+  // Update sample rate
   setSampleRate(sr: number): void {
     this.sampleRate = sr;
   }
 
+  // Configure ADSR parameters with protective minimum values
   setADSR(a: number, d: number, s: number, r: number): void {
     this.attackTime = Math.max(0.005, a);
     this.decayTime = Math.max(0.005, d);
@@ -30,16 +41,19 @@ export class Envelope {
     this.releaseTime = Math.max(0.01, r);
   }
 
+  // Key pressed: start attack
   triggerAttack(): void {
     this.currentStage = EnvelopeStage.STAGE_ATTACK;
   }
 
+  // Key released: start release
   triggerRelease(): void {
     if (this.currentStage !== EnvelopeStage.STAGE_OFF) {
       this.currentStage = EnvelopeStage.STAGE_RELEASE;
     }
   }
 
+  // Calculate next envelope volume level
   process(): number {
     switch (this.currentStage) {
       case EnvelopeStage.STAGE_OFF:
@@ -95,3 +109,4 @@ export class Envelope {
     return this.currentStage;
   }
 }
+

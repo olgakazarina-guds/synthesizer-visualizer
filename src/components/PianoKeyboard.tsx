@@ -1,3 +1,13 @@
+// ==============================================================================
+// PianoKeyboard.tsx
+// Interactive virtual piano keyboard controller (C4 to C5).
+//
+// Features:
+// - Supports both mouse clicks and touch pointer events.
+// - Keyboard shortcut bindings (A, W, S, E, D, F, T, G, Y, H, U, J, K).
+// - Visual highlight active state on currently sounding keys.
+// ==============================================================================
+
 import React from 'react';
 import { SynthEngine } from '../audio/SynthEngine';
 
@@ -118,3 +128,4 @@ export const PianoKeyboard: React.FC<PianoKeyboardProps> = ({
     </div>
   );
 };
+

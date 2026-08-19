@@ -1,3 +1,13 @@
+// ==============================================================================
+// SynthEngine.ts
+// Synthesizer Engine for Web Audio preview mirroring C++ openFrameworks Synth class.
+//
+// Role in project architecture (Olga / Left UML):
+// - Manages 8 polyphonic voices and concrete oscillators.
+// - Bridges sample-by-sample DSP generation to the browser Web Audio API via ScriptProcessorNode.
+// - Mirrors the exact audioOut() logic of the C++ openFrameworks implementation.
+// ==============================================================================
+
 import { WaveType, VoiceState } from '../types';
 import { Oscillator, SineOscillator, SquareOscillator, SawOscillator } from './Oscillator';
 import { Voice } from './Voice';
@@ -25,6 +35,7 @@ export class SynthEngine {
     this.setup(sampleRate, bufferSize, polyphony);
   }
 
+  // Initialize engine state and polyphonic voice pool
   public setup(sr: number = 44100, bufSize: number = 512, polyphony: number = 8): void {
     this.sampleRate = sr;
     this.bufferSize = bufSize;
@@ -46,6 +57,7 @@ export class SynthEngine {
     }
   }
 
+  // Starts the browser audio output engine on user interaction
   public async initAudio(): Promise<boolean> {
     if (this.audioCtx && this.audioCtx.state === 'running') {
       return true;
@@ -82,6 +94,7 @@ export class SynthEngine {
     }
   }
 
+  // Switch the waveform generator used by all voices
   public setWaveType(type: WaveType): void {
     if (type < 0 || type >= this.oscillatorPool.length) return;
     this.currentWaveType = type;
@@ -96,6 +109,7 @@ export class SynthEngine {
     return this.currentWaveType;
   }
 
+  // Update ADSR parameters across all voices
   public setADSR(a: number, d: number, s: number, r: number): void {
     for (const voice of this.voices) {
       voice.getEnvelope().setADSR(a, d, s, r);
@@ -110,10 +124,12 @@ export class SynthEngine {
     return this.masterVolume;
   }
 
+  // Convert MIDI note number to pitch frequency in Hertz (A4 = 69 = 440 Hz)
   public static midiToFreq(midiNote: number): number {
     return 440.0 * Math.pow(2.0, (midiNote - 69) / 12.0);
   }
 
+  // Allocate an available voice to play a note
   public noteOn(noteKey: number, frequency?: number): void {
     const freq = frequency ?? SynthEngine.midiToFreq(noteKey);
 
@@ -140,6 +156,7 @@ export class SynthEngine {
     }
   }
 
+  // Stop playing a note
   public noteOff(noteKey: number): void {
     for (const voice of this.voices) {
       if (voice.isPlaying() && voice.getNoteKey() == noteKey) {
@@ -156,6 +173,7 @@ export class SynthEngine {
     }
   }
 
+  // DSP processing loop: sum active voices and write to stereo channels
   public processAudio(leftChannel: Float32Array, rightChannel: Float32Array): void {
     const numFrames = leftChannel.length;
     if (this.monoBuffer.length !== numFrames) {
@@ -203,3 +221,4 @@ export class SynthEngine {
     return this.isAudioStarted;
   }
 }
+

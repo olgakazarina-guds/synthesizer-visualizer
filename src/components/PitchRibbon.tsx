@@ -1,3 +1,12 @@
+// ==============================================================================
+// PitchRibbon.tsx
+// Continuous horizontal pitch-bend touch/mouse controller (MIDI 48 to 72).
+//
+// Matches C++ ofApp mouseDragged logic:
+// - Converts horizontal pixel position to MIDI note number (C3 to C5).
+// - Allows continuous expressive glissando and pitch sliding.
+// ==============================================================================
+
 import React, { useRef } from 'react';
 import { SynthEngine } from '../audio/SynthEngine';
 import { MousePointer } from 'lucide-react';
@@ -133,3 +142,4 @@ export const PitchRibbon: React.FC<PitchRibbonProps> = ({
     </div>
   );
 };
+

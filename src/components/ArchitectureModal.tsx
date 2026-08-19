@@ -1,3 +1,14 @@
+// ==============================================================================
+// ArchitectureModal.tsx
+// Interactive modal dialog displaying the C++ OOP Architecture & UML Diagrams.
+//
+// Shows:
+// - Left architecture module (Olga: Synth, Voice, Envelope).
+// - Right architecture module (Mohammed: Oscillator, Waveforms, Visualizer).
+// - ASCII UML class hierarchy and relationship diagram.
+// - OOP concepts applied: Inheritance, Composition, Association, Polymorphism.
+// ==============================================================================
+
 import React from 'react';
 import { X } from 'lucide-react';
 
@@ -127,3 +138,4 @@ export const ArchitectureModal: React.FC<ArchitectureModalProps> = ({
     </div>
   );
 };
+
