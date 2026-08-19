@@ -4,6 +4,8 @@
 #include "Visualizer.h"
 #include "WaveType.h"
 #include <map>
+#include <set>
+#include <string>
 
 // ==============================================================================
 // ofApp.h
@@ -13,6 +15,7 @@
 // - Inherits from `ofBaseApp` to connect to window lifecycle and input events.
 // - Owns the `Synth` engine and the `Visualizer`.
 // - Coordinates computer keyboard and mouse interactions to play musical notes.
+// - Renders high-resolution visualizers, interactive piano keybed, and ribbon controls.
 // - Connects the openFrameworks audio subsystem `ofSoundStream` to `Synth::audioOut()`.
 // ==============================================================================
 
@@ -42,11 +45,20 @@ private:
     int bufferSize;               // Audio buffer size (512 frames)
 
     std::map<int, int> keyToNote; // Maps keyboard characters ('a', 's', ...) to MIDI numbers (60, 62, ...)
+    std::set<int> activeMidiNotes;// Set of currently sounding MIDI notes for visual key highlighting
     int mouseNote;                // Tracks currently playing note from mouse ribbon drag
+
+    // UI Panel dimensions
+    float pianoX, pianoY, pianoW, pianoH;
+    float ribbonX, ribbonY, ribbonW, ribbonH;
 
     // Helper setup and rendering functions
     void buildKeyMap();
     int xToMidiNote(int x) const;
-    void drawKeyboardHints();
+    void drawHeader(float x, float y, float w);
+    void drawPianoKeyboard(float x, float y, float w, float h);
+    void drawPitchRibbon(float x, float y, float w, float h);
+    void drawControlPanel(float x, float y, float w, float h);
 };
+
 
