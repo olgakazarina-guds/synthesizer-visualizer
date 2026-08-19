@@ -1,0 +1,6 @@
+{
+  "name": "OpenFrameworks Synthesizer & Visualizer",
+  "description": "Polyphonic software synthesizer and reactive real-time waveform & FFT spectrum visualizer migrated from C++ OpenFrameworks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
