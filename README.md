@@ -83,8 +83,18 @@ The application models sound synthesis strictly following our design UML class d
 
 ---
 
-## 🚀 How to Build & Run
+## 📂 Repository Structure
 
-1. Place folder in openFrameworks `apps/myApps/`.
-2. Generate project files with the openFrameworks **Project Generator**.
-3. Build & run in Xcode (macOS) or Visual Studio 2022 (Windows).
+- **`cpp_source/`**: Pure **C++ / openFrameworks v0.11.2** source code for Xcode (macOS) and Visual Studio 2022 (Windows). Use these files for your project compilation and LMS submission.
+- **`src/`**: Interactive TypeScript / Web Audio mirror for the live Google AI Studio web preview.
+
+---
+
+## 🚀 How to Build & Run (C++ openFrameworks)
+
+1. Copy the contents of `cpp_source/` into `openFrameworks/apps/myApps/Synthesizer/src/`.
+2. Open the **openFrameworks Project Generator** (`openFrameworks/projectGenerator/`).
+3. Set project path to `apps/myApps/Synthesizer` and click **Update** (or **Generate**).
+4. Open the generated project in:
+   - **macOS**: `Synthesizer.xcodeproj` in **Xcode** (click Run ▶).
+   - **Windows**: `Synthesizer.sln` in **Visual Studio 2022** (press F5).
