@@ -39,6 +39,7 @@ export const App: React.FC = () => {
   const [activeNotes, setActiveNotes] = useState<Set<number>>(new Set());
   const [activeMouseNote, setActiveMouseNote] = useState<number | null>(null);
   const [voiceStates, setVoiceStates] = useState<VoiceState[]>([]);
+  const [octaveOffset, setOctaveOffset] = useState<number>(0);
   const [isArchModalOpen, setIsArchModalOpen] = useState<boolean>(false);
 
   // Home row keyboard mappings matching ofApp::buildKeyMap()
@@ -111,7 +112,7 @@ export const App: React.FC = () => {
 
   // Keyboard shortcut listeners matching ofApp::keyPressed and ofApp::keyReleased
   useEffect(() => {
-    const pressedKeys = new Set<string>();
+    const pressedKeys = new Map<string, number>();
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.repeat) return;
@@ -131,19 +132,19 @@ export const App: React.FC = () => {
         return;
       }
 
-      // Musical note keys (A through K)
+      // Musical note keys (A through K) with current octave transpose
       if (keyToNoteMap[key] !== undefined && !pressedKeys.has(key)) {
-        pressedKeys.add(key);
-        const midi = keyToNoteMap[key];
+        const midi = keyToNoteMap[key] + octaveOffset;
+        pressedKeys.set(key, midi);
         handleNoteOn(midi);
       }
     };
 
     const onKeyUp = (e: KeyboardEvent) => {
       const key = e.key.toLowerCase();
-      if (keyToNoteMap[key] !== undefined) {
+      if (pressedKeys.has(key)) {
+        const midi = pressedKeys.get(key)!;
         pressedKeys.delete(key);
-        const midi = keyToNoteMap[key];
         handleNoteOff(midi);
       }
     };
@@ -155,7 +156,7 @@ export const App: React.FC = () => {
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('keyup', onKeyUp);
     };
-  }, [handleNoteOn, handleNoteOff]);
+  }, [handleNoteOn, handleNoteOff, octaveOffset]);
 
   // Periodic polling of voice state for the UI indicator matrix
   useEffect(() => {
@@ -196,11 +197,13 @@ export const App: React.FC = () => {
           activeMouseNote={activeMouseNote}
         />
 
-        {/* Piano Keyboard */}
+        {/* Piano Keyboard Controller with 3D Keys & Octave Controls */}
         <PianoKeyboard
           onNoteOn={handleNoteOn}
           onNoteOff={handleNoteOff}
           activeNotes={activeNotes}
+          octaveOffset={octaveOffset}
+          onOctaveChange={setOctaveOffset}
         />
 
         {/* Bottom: Waveform, ADSR, & Voice Allocation Controls */}
