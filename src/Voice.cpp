@@ -28,11 +28,7 @@ float Voice::generateSample() {
     if (!envelope.isActive() || oscillatorPtr == nullptr) {
         return 0.0f;
     }
-
-    float rawSample = oscillatorPtr->generateSample(); 
-    float envVolume = envelope.process();
-
-    return rawSample * envVolume;
+    return oscillatorPtr->generateSample() * envelope.process();
 }
 
 bool Voice::isPlaying() const {

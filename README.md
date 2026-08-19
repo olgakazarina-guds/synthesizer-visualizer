@@ -85,16 +85,18 @@ The application models sound synthesis strictly following our design UML class d
 
 ## 📂 Repository Structure
 
-- **`cpp_source/`**: Pure **C++ / openFrameworks v0.11.2** source code for Xcode (macOS) and Visual Studio 2022 (Windows). Use these files for your project compilation and LMS submission.
-- **`src/`**: Interactive TypeScript / Web Audio mirror for the live Google AI Studio web preview.
+- **`src/`**: Contains all **C++ / openFrameworks v0.11.2** source files (`.h` and `.cpp`) alongside the Web Audio preview components.
+- **`.gitignore`**: Pre-configured cross-platform ignore rules for macOS, Windows, Xcode, and Visual Studio.
 
 ---
 
-## 🚀 How to Build & Run (C++ openFrameworks)
+## 🚀 How to Build & Run with openFrameworks
 
-1. Copy the contents of `cpp_source/` into `openFrameworks/apps/myApps/Synthesizer/src/`.
+1. Clone or place this repository directly into `openFrameworks/apps/myApps/Test2/` (or your project name).
 2. Open the **openFrameworks Project Generator** (`openFrameworks/projectGenerator/`).
-3. Set project path to `apps/myApps/Synthesizer` and click **Update** (or **Generate**).
-4. Open the generated project in:
-   - **macOS**: `Synthesizer.xcodeproj` in **Xcode** (click Run ▶).
-   - **Windows**: `Synthesizer.sln` in **Visual Studio 2022** (press F5).
+3. In Project Generator:
+   - Click the folder/browse icon and select your project path (`apps/myApps/Test2`).
+   - Click **"Update"**.
+4. Open in your IDE:
+   - **macOS**: Double-click `Test2.xcodeproj` in **Xcode** (click Run ▶).
+   - **Windows**: Double-click `Test2.sln` in **Visual Studio 2022** (press F5).

@@ -1,7 +1,6 @@
 #pragma once
 #include "Oscillator.h"
 
-// 2. Concrete Square Wave Oscillator
 class SquareOscillator : public Oscillator {
 public:
     SquareOscillator(float sr = 44100.0f) : Oscillator(sr) {}

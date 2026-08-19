@@ -24,22 +24,14 @@ public:
         releaseTime  = std::max(0.01f, r);
     }
 
-    void triggerAttack() {
-        currentStage = STAGE_ATTACK;
-    }
-
-    void triggerRelease() {
-        if (currentStage != STAGE_OFF) {
-            currentStage = STAGE_RELEASE;
-        }
-    }
+    void triggerAttack() { currentStage = STAGE_ATTACK; }
+    void triggerRelease() { if (currentStage != STAGE_OFF) currentStage = STAGE_RELEASE; }
 
     float process() {
         switch (currentStage) {
             case STAGE_OFF:
                 currentLevel = 0.0f;
                 break;
-
             case STAGE_ATTACK: {
                 float attackStep = 1.0f / (attackTime * sampleRate);
                 currentLevel += attackStep;
@@ -49,7 +41,6 @@ public:
                 }
                 break;
             }
-
             case STAGE_DECAY: {
                 float decayStep = (1.0f - sustainLevel) / (decayTime * sampleRate);
                 currentLevel -= decayStep;
@@ -59,11 +50,9 @@ public:
                 }
                 break;
             }
-
             case STAGE_SUSTAIN:
                 currentLevel = sustainLevel;
                 break;
-
             case STAGE_RELEASE: {
                 float releaseStep = sustainLevel / (releaseTime * sampleRate);
                 currentLevel -= releaseStep;
@@ -77,19 +66,15 @@ public:
         return currentLevel;
     }
 
-    bool isActive() const {
-        return currentStage != STAGE_OFF;
-    }
-
+    bool isActive() const { return currentStage != STAGE_OFF; }
     float getCurrentLevel() const { return currentLevel; }
 
 private:
     float sampleRate;
     EnvelopeStage currentStage;
     float currentLevel;
-
-    float attackTime;    // seconds
-    float decayTime;     // seconds
-    float sustainLevel;  // 0.0 to 1.0
-    float releaseTime;   // seconds
+    float attackTime;
+    float decayTime;
+    float sustainLevel;
+    float releaseTime;
 };

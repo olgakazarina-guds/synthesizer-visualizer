@@ -1,7 +1,6 @@
 #pragma once
 #include "Oscillator.h"
 
-// 1. Concrete Sine Wave Oscillator
 class SineOscillator : public Oscillator {
 public:
     SineOscillator(float sr = 44100.0f) : Oscillator(sr) {}
