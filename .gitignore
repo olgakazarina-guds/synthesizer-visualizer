@@ -1,0 +1,87 @@
+# ==========================================
+# openFrameworks Cross-Platform .gitignore
+# macOS / Windows / Xcode / Visual Studio / VS Code
+# ==========================================
+
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows System Files
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Xcode & macOS Build Artifacts
+build/
+DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xcuserstate
+*.xcbkptlist
+*.xcworkspace/xcuserdata/
+
+# Visual Studio (Windows) Build Artifacts
+.vs/
+Debug/
+Release/
+x64/
+x86/
+ARM/
+ARM64/
+bin/*.exe
+bin/*.pdb
+bin/*.ilk
+bin/*.dll
+obj/
+*.suo
+*.user
+*.useroscan
+*.sln.docstates
+*.opendb
+*.db
+*.ipch
+*.log
+*.tlog
+*.idb
+
+# openFrameworks Binaries & Compiled Executables
+bin/*.app/
+bin/*.dSYM/
+bin/mySketchDebug.app/
+bin/mySketchRelease.app/
+*.o
+*.a
+*.dylib
+*.so
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Node.js & Web (AI Studio Preview)
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
