@@ -1,20 +1,6 @@
 #pragma once
 #include <algorithm>
 
-// ==============================================================================
-// Envelope.h
-// ADSR Volume Envelope Generator (Attack, Decay, Sustain, Release).
-//
-// Role in project architecture (Olga / Left UML):
-// - Shapes the volume of each note over time to prevent sudden audio clicks.
-// - Implements a finite state machine:
-//     1. STAGE_OFF: Note is silent (level = 0.0).
-//     2. STAGE_ATTACK: Ramps from 0.0 up to 1.0 (peak volume).
-//     3. STAGE_DECAY: Drops from 1.0 down to sustain level.
-//     4. STAGE_SUSTAIN: Stays constant while the key is held down.
-//     5. STAGE_RELEASE: Fades from sustain level down to 0.0 when key is released.
-// ==============================================================================
-
 enum EnvelopeStage {
     STAGE_OFF,
     STAGE_ATTACK,

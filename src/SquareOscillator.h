@@ -1,15 +1,6 @@
 #pragma once
 #include "Oscillator.h"
 
-// ==============================================================================
-// SquareOscillator.h
-// Concrete implementation of a Square Wave Oscillator (Inherits from Oscillator).
-//
-// DSP Math:
-// - If phase < 0.5, output +0.8 (high state).
-// - If phase >= 0.5, output -0.8 (low state).
-// - Creates a rich hollow timbre with strong odd harmonics (1st, 3rd, 5th, etc.).
-// ==============================================================================
 
 class SquareOscillator : public Oscillator {
 public:

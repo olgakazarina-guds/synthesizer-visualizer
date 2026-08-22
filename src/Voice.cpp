@@ -1,9 +1,5 @@
 #include "Voice.h"
 
-// ==============================================================================
-// Voice.cpp
-// Implementation of polyphonic voice logic.
-// ==============================================================================
 
 // Constructor: initializes pointers and default state
 Voice::Voice(float sampleRate)

@@ -2,17 +2,6 @@
 #include "ofMain.h"
 #include <vector>
 
-// ==============================================================================
-// Visualizer.h
-// Real-time Audio Visualizer (OOP Principle: Association with Synth).
-//
-// Role in project architecture (Mohammed / Right UML):
-// - Inspects the floating-point audio buffer output by the Synth.
-// - Renders two real-time visual displays:
-//     1. Oscilloscope Waveform (Time Domain): plots amplitude over time using ofPolyline.
-//     2. Spectrum Analyzer (Frequency Domain): computes DFT magnitudes and draws frequency bars.
-// ==============================================================================
-
 class Visualizer {
 public:
     // Constructor

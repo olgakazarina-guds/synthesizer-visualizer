@@ -6,17 +6,6 @@
 #include <vector>
 #include <memory>
 
-// ==============================================================================
-// Synth.h
-// Main Polyphonic Synthesizer Engine (OOP Principle: Composition & Association).
-//
-// Role in project architecture (Olga / Left UML):
-// - Central audio engine that manages a bank of 8 polyphonic Voice instances.
-// - Maintains an oscillator pool (Sine, Square, Saw) that voices point to.
-// - Handles incoming note-on / note-off events and voice allocation.
-// - Implements the openFrameworks `audioOut(ofSoundBuffer &buffer)` stream callback.
-// - Provides `getBuffer()` so the Visualizer can inspect real-time audio samples.
-// ==============================================================================
 
 class Synth {
 public:

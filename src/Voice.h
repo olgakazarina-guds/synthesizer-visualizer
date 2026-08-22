@@ -2,16 +2,6 @@
 #include "Oscillator.h"
 #include "Envelope.h"
 
-// ==============================================================================
-// Voice.h
-// Represents a single polyphonic voice (OOP Principle: Composition).
-//
-// Role in project architecture (Olga / Left UML):
-// - Manages the playback of one specific musical note.
-// - Composes an Envelope (for ADSR amplitude shaping).
-// - Holds a pointer to the active Oscillator (for waveform generation).
-// - Combines waveform * envelope volume to output the final audio sample.
-// ==============================================================================
 
 class Voice {
 public:

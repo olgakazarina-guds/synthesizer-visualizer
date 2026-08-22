@@ -1,15 +1,6 @@
 #pragma once
 #include "Oscillator.h"
 
-// ==============================================================================
-// SineOscillator.h
-// Concrete implementation of a Sine Wave Oscillator (Inherits from Oscillator).
-//
-// DSP Math:
-// - Uses the mathematical sine function: sample = sin(2 * pi * phase)
-// - Advances phase by (frequency / sampleRate) on each audio frame.
-// - Produces a pure, smooth sinusoidal tone with no upper harmonics.
-// ==============================================================================
 
 class SineOscillator : public Oscillator {
 public:

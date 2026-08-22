@@ -3,10 +3,6 @@
 #include "SquareOscillator.h"
 #include "SawOscillator.h"
 
-// ==============================================================================
-// Synth.cpp
-// Implementation of the main polyphonic synthesizer engine.
-// ==============================================================================
 
 // Constructor: sets default parameters
 Synth::Synth()

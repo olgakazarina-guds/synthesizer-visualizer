@@ -1,16 +1,6 @@
 #pragma once
 #include "Oscillator.h"
 
-// ==============================================================================
-// SawOscillator.h
-// Concrete implementation of a Sawtooth Wave Oscillator (Inherits from Oscillator).
-//
-// DSP Math:
-// - Linear rising ramp formula: sample = 2.0 * phase - 1.0
-// - Maps phase [0.0, 1.0) directly to output range [-1.0, 1.0].
-// - Scaled by 0.7 to balance perceived loudness.
-// - Produces a bright, buzzy, aggressive sound containing all integer harmonics.
-// ==============================================================================
 
 class SawOscillator : public Oscillator {
 public:

@@ -1,9 +1,5 @@
 #include "Visualizer.h"
 
-// ==============================================================================
-// Visualizer.cpp
-// Implementation of real-time waveform and DFT spectrum analyzer drawing.
-// ==============================================================================
 
 // Constructor: sets default FFT size to 256
 Visualizer::Visualizer() : fftSize(256) {}

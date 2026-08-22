@@ -7,17 +7,6 @@
 #include <set>
 #include <string>
 
-// ==============================================================================
-// ofApp.h
-// Main openFrameworks Application Controller.
-//
-// Role in project architecture:
-// - Inherits from `ofBaseApp` to connect to window lifecycle and input events.
-// - Owns the `Synth` engine and the `Visualizer`.
-// - Coordinates computer keyboard and mouse interactions to play musical notes.
-// - Renders high-resolution visualizers, interactive piano keybed, and ribbon controls.
-// - Connects the openFrameworks audio subsystem `ofSoundStream` to `Synth::audioOut()`.
-// ==============================================================================
 
 class ofApp : public ofBaseApp {
 public:

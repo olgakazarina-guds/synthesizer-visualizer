@@ -1,9 +1,5 @@
 #include "ofApp.h"
 
-// ==============================================================================
-// ofApp.cpp
-// Implementation of openFrameworks lifecycle, graphics drawing, and interaction.
-// ==============================================================================
 
 // 1. SETUP: Called once when the app starts
 void ofApp::setup() {
