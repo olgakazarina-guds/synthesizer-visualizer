@@ -13,6 +13,7 @@ export class Envelope {
   private sampleRate: number;
   private currentStage: EnvelopeStage;
   private currentLevel: number;
+  private releaseStartLevel: number = 0.0;
   private attackTime: number;
   private decayTime: number;
   private sustainLevel: number;
@@ -22,6 +23,7 @@ export class Envelope {
     this.sampleRate = sampleRate;
     this.currentStage = EnvelopeStage.STAGE_OFF;
     this.currentLevel = 0.0;
+    this.releaseStartLevel = 0.0;
     this.attackTime = 0.05;
     this.decayTime = 0.1;
     this.sustainLevel = 0.7;
@@ -49,7 +51,13 @@ export class Envelope {
   // Key released: start release
   triggerRelease(): void {
     if (this.currentStage !== EnvelopeStage.STAGE_OFF) {
-      this.currentStage = EnvelopeStage.STAGE_RELEASE;
+      this.releaseStartLevel = this.currentLevel;
+      if (this.releaseStartLevel <= 0.0001) {
+        this.currentLevel = 0.0;
+        this.currentStage = EnvelopeStage.STAGE_OFF;
+      } else {
+        this.currentStage = EnvelopeStage.STAGE_RELEASE;
+      }
     }
   }
 
@@ -85,7 +93,8 @@ export class Envelope {
         break;
 
       case EnvelopeStage.STAGE_RELEASE: {
-        const releaseStep = this.sustainLevel / (this.releaseTime * this.sampleRate);
+        let releaseStep = this.releaseStartLevel / (this.releaseTime * this.sampleRate);
+        if (releaseStep <= 0.0) releaseStep = 0.001;
         this.currentLevel -= releaseStep;
         if (this.currentLevel <= 0.0001) {
           this.currentLevel = 0.0;

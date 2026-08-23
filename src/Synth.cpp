@@ -11,36 +11,29 @@ Synth::Synth()
 
 Synth::~Synth() {}
 
-// Set up audio system, initialize oscillator pool, and allocate voices
+// Set up audio system and allocate polyphonic voices
 void Synth::setup(int sr, int bufSize, int polyphony) {
     sampleRate = sr;
     bufferSize = bufSize;
     monoBuffer.resize(bufferSize, 0.0f);
 
-    // 1. Create one instance of each concrete oscillator in our pool
-    oscillatorPool.clear();
-    oscillatorPool.push_back(std::make_unique<SineOscillator>((float)sampleRate));
-    oscillatorPool.push_back(std::make_unique<SquareOscillator>((float)sampleRate));
-    oscillatorPool.push_back(std::make_unique<SawOscillator>((float)sampleRate));
-
-    // 2. Allocate polyphonic voices and assign default oscillator pointer
+    // Allocate polyphonic voices, each owning its independent oscillator
     voices.clear();
+    voices.reserve(polyphony);
     for (int i = 0; i < polyphony; i++) {
         Voice v((float)sampleRate);
-        v.setOscillator(oscillatorPool[static_cast<int>(currentWaveType)].get());
-        voices.push_back(v);
+        v.setWaveType(currentWaveType);
+        voices.push_back(std::move(v));
     }
 }
 
 // Switch the waveform generator used by all voices
 void Synth::setWaveType(WaveType type) {
-    int typeIndex = static_cast<int>(type);
-    if (typeIndex < 0 || typeIndex >= (int)oscillatorPool.size()) return;
     currentWaveType = type;
 
-    // Point every voice's oscillator pointer to the newly selected waveform
+    // Update every voice to its dedicated new waveform oscillator
     for (auto & voice : voices) {
-        voice.setOscillator(oscillatorPool[typeIndex].get());
+        voice.setWaveType(type);
     }
 }
 

@@ -9,7 +9,6 @@
 // ==============================================================================
 
 import { WaveType, VoiceState } from '../types';
-import { Oscillator, SineOscillator, SquareOscillator, SawOscillator } from './Oscillator';
 import { Voice } from './Voice';
 
 export class SynthEngine {
@@ -19,7 +18,6 @@ export class SynthEngine {
   private currentWaveType: WaveType = WaveType.SINE;
 
   private voices: Voice[] = [];
-  private oscillatorPool: Oscillator[] = [];
   private monoBuffer: Float32Array;
 
   // Web Audio Context
@@ -41,18 +39,11 @@ export class SynthEngine {
     this.bufferSize = bufSize;
     this.monoBuffer = new Float32Array(this.bufferSize);
 
-    // Instantiate Concrete Oscillators (SINE = 0, SQUARE = 1, SAW = 2)
-    this.oscillatorPool = [
-      new SineOscillator(this.sampleRate),
-      new SquareOscillator(this.sampleRate),
-      new SawOscillator(this.sampleRate),
-    ];
-
-    // Initialize Voice instances
+    // Initialize Voice instances, each with its dedicated oscillator
     this.voices = [];
     for (let i = 0; i < polyphony; i++) {
       const v = new Voice(this.sampleRate);
-      v.setOscillator(this.oscillatorPool[this.currentWaveType]);
+      v.setWaveType(this.currentWaveType);
       this.voices.push(v);
     }
   }
@@ -96,12 +87,11 @@ export class SynthEngine {
 
   // Switch the waveform generator used by all voices
   public setWaveType(type: WaveType): void {
-    if (type < 0 || type >= this.oscillatorPool.length) return;
     this.currentWaveType = type;
 
     // Update all voices
     for (const voice of this.voices) {
-      voice.setOscillator(this.oscillatorPool[type]);
+      voice.setWaveType(type);
     }
   }
 

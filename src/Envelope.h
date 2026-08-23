@@ -35,7 +35,13 @@ public:
     // Called when a piano key is released
     void triggerRelease() { 
         if (currentStage != STAGE_OFF) {
-            currentStage = STAGE_RELEASE; 
+            releaseStartLevel = currentLevel;
+            if (releaseStartLevel <= 0.0001f) {
+                currentLevel = 0.0f;
+                currentStage = STAGE_OFF;
+            } else {
+                currentStage = STAGE_RELEASE;
+            }
         }
     }
 
@@ -74,8 +80,9 @@ public:
                 break;
 
             case STAGE_RELEASE: {
-                // Step size needed to drop from sustainLevel to 0.0 in releaseTime seconds
-                float releaseStep = sustainLevel / (releaseTime * sampleRate);
+                // Step size needed to drop from releaseStartLevel to 0.0 in releaseTime seconds
+                float releaseStep = releaseStartLevel / (releaseTime * sampleRate);
+                if (releaseStep <= 0.0f) releaseStep = 0.001f;
                 currentLevel -= releaseStep;
                 if (currentLevel <= 0.0001f) {
                     currentLevel = 0.0f;
@@ -96,10 +103,11 @@ public:
 private:
     float sampleRate;
     EnvelopeStage currentStage;
-    float currentLevel;    // Current envelope gain (0.0 to 1.0)
-    float attackTime;      // Attack time in seconds
-    float decayTime;       // Decay time in seconds
-    float sustainLevel;    // Sustain level (0.0 to 1.0)
-    float releaseTime;     // Release time in seconds
+    float currentLevel;       // Current envelope gain (0.0 to 1.0)
+    float releaseStartLevel;  // Envelope gain when key was released
+    float attackTime;         // Attack time in seconds
+    float decayTime;          // Decay time in seconds
+    float sustainLevel;       // Sustain level (0.0 to 1.0)
+    float releaseTime;        // Release time in seconds
 };
 

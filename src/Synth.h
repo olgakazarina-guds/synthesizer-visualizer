@@ -42,7 +42,6 @@ private:
     float masterVolume;  // Master gain multiplier
 
     std::vector<Voice> voices;                               // Bank of polyphonic voices (Composition)
-    std::vector<std::unique_ptr<Oscillator>> oscillatorPool; // Pool of wave generators (Polymorphism)
     WaveType currentWaveType;                                // Currently active waveform selection
 
     std::vector<float> monoBuffer;                           // Internal buffer copy for visualization
