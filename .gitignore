@@ -31,7 +31,9 @@ DerivedData/
 xcuserdata/
 *.xcuserstate
 *.xcbkptlist
+*.xcuserdatad
 *.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
 
 # Visual Studio (Windows) Build Artifacts
 .vs/
@@ -75,7 +77,7 @@ bin/mySketchRelease.app/
 !.vscode/extensions.json
 *.code-workspace
 
-# Node.js & Web (AI Studio Preview)
+# Node.js & Web (Preview Artifacts)
 node_modules/
 dist/
 .env
