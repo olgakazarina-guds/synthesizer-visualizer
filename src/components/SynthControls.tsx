@@ -130,7 +130,7 @@ export const SynthControls: React.FC<SynthControlsProps> = ({
                 ADSR VOLUME ENVELOPE
               </span>
             </div>
-            <span className="text-[10px] font-mono text-slate-400">Olga / Left UML</span>
+            <span className="text-[10px] font-mono text-slate-400">Envelope Generator</span>
           </div>
 
           <div className="space-y-3">

@@ -2,7 +2,7 @@
 // Voice.ts
 // Polyphonic Voice Component (Composition: has an Envelope and dedicated Oscillator).
 //
-// Role in project architecture (Olga / Left UML):
+// Role in project architecture:
 // - Represents one active or idle musical voice.
 // - Plays a given MIDI frequency and multiplies the oscillator sample by the envelope.
 // ==============================================================================

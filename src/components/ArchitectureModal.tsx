@@ -48,7 +48,7 @@ export const ArchitectureModal: React.FC<ArchitectureModalProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
               <h4 className="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">
-                Olga (Left UML Architecture)
+                Olga Kazarina (s-01132) — Core Audio & Voices
               </h4>
               <ul className="space-y-1.5 text-xs text-slate-400">
                 <li>• <strong className="text-slate-200">Synth</strong>: Core audio engine container and stream callback.</li>
@@ -59,7 +59,7 @@ export const ArchitectureModal: React.FC<ArchitectureModalProps> = ({
 
             <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
               <h4 className="font-mono text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2">
-                Mohammed (Right UML Architecture)
+                Mohammedsaleh Ibrahim (s-01136) — Oscillators & Visualizer
               </h4>
               <ul className="space-y-1.5 text-xs text-slate-400">
                 <li>• <strong className="text-slate-200">Oscillator</strong>: Abstract base class with pure virtual interface.</li>

@@ -2,7 +2,7 @@
 // VisualizerEngine.ts
 // Real-time Canvas Visualizer rendering Oscilloscope & DFT Spectrum.
 //
-// Role in project architecture (Mohammed / Right UML):
+// Role in project architecture:
 // - Renders green time-domain oscilloscope waveform.
 // - Performs Discrete Fourier Transform (DFT) to render frequency magnitude bars.
 // ==============================================================================

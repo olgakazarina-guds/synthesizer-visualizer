@@ -2,9 +2,9 @@
 // Envelope.ts
 // ADSR Volume Envelope Generator (Attack, Decay, Sustain, Release).
 //
-// Role in project architecture (Olga / Left UML):
-// - Controls the note volume over time with 4 stages to avoid audio pops.
-// - process() returns a multiplier between 0.0 (silent) and 1.0 (full volume).
+// Role in project architecture:
+// - Controls note amplitude over time with 4 distinct stages to prevent audio clicks/pops.
+// - process() returns a gain multiplier between 0.0 (silent) and 1.0 (full volume).
 // ==============================================================================
 
 import { EnvelopeStage } from '../types';

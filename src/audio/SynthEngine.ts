@@ -2,9 +2,9 @@
 // SynthEngine.ts
 // Synthesizer Engine for Web Audio preview mirroring C++ openFrameworks Synth class.
 //
-// Role in project architecture (Olga / Left UML):
-// - Manages 8 polyphonic voices and concrete oscillators.
-// - Bridges sample-by-sample DSP generation to the browser Web Audio API via ScriptProcessorNode.
+// Role in project architecture:
+// - Manages polyphonic voices and wave type allocation.
+// - Bridges sample-by-sample DSP generation to the browser Web Audio API.
 // - Mirrors the exact audioOut() logic of the C++ openFrameworks implementation.
 // ==============================================================================
 

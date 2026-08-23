@@ -2,7 +2,7 @@
 // Oscillator.ts
 // Abstract Base Class and Concrete Waveform Oscillators (Inheritance & Polymorphism).
 //
-// Role in project architecture (Mohammed / Right UML):
+// Role in project architecture:
 // - Defines the abstract Oscillator base class with common fields (frequency, sampleRate, phase).
 // - Subclasses implement generateSample() with their specific DSP formula.
 // ==============================================================================
